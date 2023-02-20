@@ -5,6 +5,14 @@ import * as parkDate from "./data/skateboard-parks.json";
 export default function App() {
   let dist;
 
+  const temp = {
+    latitude: 13.0213,
+    longitude: 80.2231,
+    width: "100vw",
+    height: "100vh",
+    zoom: 10
+  };
+
   const [viewport, setViewport] = useState({
     latitude: 13.0213,
     longitude: 80.2231,
@@ -36,11 +44,13 @@ export default function App() {
   }
 
   const handleChange1 = (event) => {
-    setViewport(event.target.value);
+    temp.latitude = parseFloat(event.target.value);
+    setViewport(temp);
   };
 
   const handleChange2 = (event) => {
-    setViewport(event.target.value);
+    temp.longitude = parseFloat(event.target.value);
+    setViewport(temp);
   };
 
   function display(item, dista) {
@@ -84,6 +94,7 @@ export default function App() {
         type="text"
         id="message"
         name="message"
+        placeholder='Latitude'
         onChange={handleChange1}
       />
 
@@ -91,7 +102,7 @@ export default function App() {
         type="text"
         id="message"
         name="message"
-        placeholder='Hi'
+        placeholder='Longitude'
         onChange={handleChange2}
       />
 
@@ -101,7 +112,7 @@ export default function App() {
 
       <br /><br /><br /><br />
       <div className="sidebar">
-        Distance: {distance} | From Latitude: {viewport.latitude} | From Longitude: {viewport.longitude} | To Latitude: {1} | To Longitude: {2} |
+        Distance: {distance} | From Latitude: {viewport.latitude} | From Longitude: {viewport.longitude} | To Latitude: {toLat} | To Longitude: {2} |
       </div>
       {/* <div ref={mapContainer} className="map-container" /> */}
 
