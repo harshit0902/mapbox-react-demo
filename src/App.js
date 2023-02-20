@@ -14,6 +14,8 @@ export default function App() {
   });
   const [selectedPark, setSelectedPark] = useState(null);
   const [distance, setDistance] = useState(0);
+  const [toLat, setToLat] = useState(0);
+  const [toLong, setToLong] = useState(0);
 
   function deg2rad(deg) {
     return deg * (Math.PI / 180)
@@ -99,7 +101,7 @@ export default function App() {
 
       <br /><br /><br /><br />
       <div className="sidebar">
-        Distance: {distance} | From Latitude: {13.0213} | From Longitude: {80.2231} | To Latitude: {13.0102} | To Longitude: {80.2157} |
+        Distance: {distance} | From Latitude: {viewport.latitude} | From Longitude: {viewport.longitude} | To Latitude: {1} | To Longitude: {2} |
       </div>
       {/* <div ref={mapContainer} className="map-container" /> */}
 
