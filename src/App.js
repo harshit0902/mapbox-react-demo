@@ -43,15 +43,7 @@ export default function App() {
     return d;
   }
 
-  const handleChange1 = (event) => {
-    temp.latitude = parseFloat(event.target.value);
-    setViewport(temp);
-  };
-
-  const handleChange2 = (event) => {
-    temp.longitude = parseFloat(event.target.value);
-    setViewport(temp);
-  };
+  
 
   function display(item, dista) {
     if (dista < 50) {
@@ -95,7 +87,7 @@ export default function App() {
         id="message"
         name="message"
         placeholder='Latitude'
-        onChange={handleChange1}
+        onChange={(e)=>{setToLat(e.target.value)}}
       />
 
       <input
@@ -103,7 +95,7 @@ export default function App() {
         id="message"
         name="message"
         placeholder='Longitude'
-        onChange={handleChange2}
+        onChange={(e)=>{setToLong(e.target.value)}}
       />
 
       <button className="button" onClick={calculate}>
@@ -112,7 +104,7 @@ export default function App() {
 
       <br /><br /><br /><br />
       <div className="sidebar">
-        Distance: {distance} | From Latitude: {viewport.latitude} | From Longitude: {viewport.longitude} | To Latitude: {toLat} | To Longitude: {2} |
+        Distance: {distance} | From Latitude: {viewport.latitude} | From Longitude: {viewport.longitude} | To Latitude: {toLat} | To Longitude: {toLong} |
       </div>
       {/* <div ref={mapContainer} className="map-container" /> */}
 
