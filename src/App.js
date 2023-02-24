@@ -4,7 +4,8 @@ import * as parkDate from "./data/skateboard-parks.json";
 
 export default function App() {
   let dist;
-
+  // let places=[];
+  let [places,setPlaces]=useState([]);
   const temp = {
     latitude: 13.0213,
     longitude: 80.2231,
@@ -22,9 +23,32 @@ export default function App() {
   });
   const [selectedPark, setSelectedPark] = useState(null);
   const [distance, setDistance] = useState(0);
+  const [fromLat, setFromLat] = useState(0);
+  const [fromLong, setFromLong] = useState(0);
   const [toLat, setToLat] = useState(0);
   const [toLong, setToLong] = useState(0);
 
+  function changeCoord(lat, lon)
+  {
+    setFromLat(lat);
+    setFromLong(lon);
+  }
+
+  const getLocation = () => {
+    if (!navigator.geolocation) {
+      setStatus('Geolocation is not supported by your browser');
+    } else {
+      setStatus('Locating...');
+      navigator.geolocation.getCurrentPosition((position) => {
+        setStatus(null);
+        setLat(position.coords.latitude);
+        setLng(position.coords.longitude);
+      }, () => {
+        setStatus('Unable to retrieve your location');
+      });
+    }
+  }
+  
   function deg2rad(deg) {
     return deg * (Math.PI / 180)
   }
@@ -49,6 +73,10 @@ export default function App() {
     if (dista < 50) {
       console.log(item.properties.NAME);
       console.log(dista);
+      let temp=places;
+      temp.push(item.properties.NAME);
+      setPlaces(temp);
+      // places.push(item.properties.NAME);
       // mark = mapboxgl.marker([13.54, 80.25]);
       // mapboxgl.marker;
     }
@@ -60,7 +88,11 @@ export default function App() {
 
   function calculate() {
     parkDate.features.map((item) => (
-      dist = getDistanceFromLatLonInKm(viewport.latitude, viewport.longitude, item.geometry.coordinates[1], item.geometry.coordinates[0]),
+      console.log("To Lat: " + item.geometry.coordinates[1]),
+      console.log("To Long: " + item.geometry.coordinates[0]),
+      setToLat(item.geometry.coordinates[1]),
+      setToLong(item.geometry.coordinates[0]),
+      dist = getDistanceFromLatLonInKm(fromLat, fromLong, item.geometry.coordinates[1], item.geometry.coordinates[0]),
       setDistance(dist * 1.6),
       display(item, dist * 1.6)
     ))
@@ -83,28 +115,28 @@ export default function App() {
     <div>
 
       <input
-        type="text"
+        type="number"
         id="message"
         name="message"
         placeholder='Latitude'
-        onChange={(e)=>{setToLat(e.target.value)}}
+        onChange={(e)=>{setFromLat(e.target.value)}}
       />
 
       <input
-        type="text"
+        type="number"
         id="message"
         name="message"
         placeholder='Longitude'
-        onChange={(e)=>{setToLong(e.target.value)}}
+        onChange={(e)=>{setFromLong(e.target.value)}}
       />
 
       <button className="button" onClick={calculate}>
-        Generate Countdown
+        Calculate Distance
       </button>
 
       <br /><br /><br /><br />
       <div className="sidebar">
-        Distance: {distance} | From Latitude: {viewport.latitude} | From Longitude: {viewport.longitude} | To Latitude: {toLat} | To Longitude: {toLong} |
+        Distance: {distance} | From Latitude: {fromLat} | From Longitude: {fromLong} | To Latitude: {toLat} | To Longitude: {toLong} |
       </div>
       {/* <div ref={mapContainer} className="map-container" /> */}
 
@@ -116,6 +148,14 @@ export default function App() {
           setViewport(viewport);
         }}
       >
+
+      <button onClick={getLocation}>Get Location</button>
+      <h1>Coordinates</h1>
+      <p>{status}</p>
+      {lat && <p>Latitude: {lat}</p>}
+      {lng && <p>Longitude: {lng}</p>}
+
+      
         {parkDate.features.map(park => (
           <Marker
             key={park.properties.PARK_ID}
@@ -135,6 +175,8 @@ export default function App() {
         ))}
 
         {selectedPark ? (
+          () => changeCoord(selectedPark.geometry.coordinates[1], selectedPark.geometry.coordinates[0]),
+          console.log(selectedPark.geometry.coordinates[1]),
           <Popup
             latitude={selectedPark.geometry.coordinates[1]}
             longitude={selectedPark.geometry.coordinates[0]}
@@ -148,6 +190,15 @@ export default function App() {
             </div>
           </Popup>
         ) : null}
+
+        {places.map((a)=>{   
+return(
+  <>
+  Place is:{a} 
+<br></br>
+  </>
+)
+})} 
       </ReactMapGL>
     </div>
   );
