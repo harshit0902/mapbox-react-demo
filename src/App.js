@@ -3,7 +3,7 @@ import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import { GoogleComponent } from 'react-google-location'
 import * as parkDate from "./data/skateboard-parks.json";
 
-const API_KEY = AIzaSyDqfJ_zdvn2YbMEhhiIYN__D74FAIJB_Fs;
+const API_KEY = AIzaSyCx0BnRX-Jsl-ic0UP0orEf-c0oEdHwR4A;
 
 export default function App() {
   let dist;
