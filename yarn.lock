@@ -8139,6 +8139,11 @@
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-5.1.4.tgz"
   "version" "5.1.4"
 
+"react-google-location@^1.2.2":
+  "integrity" "sha512-eGZRPLtacKHUwEEWT4tYszv0d6HgfrFwPFvx7v7k3+2uxZ93D+4vmEG9VxZD1uAMiqNvos0RTiy7gZGkZpWjNA=="
+  "resolved" "https://registry.npmjs.org/react-google-location/-/react-google-location-1.2.2.tgz"
+  "version" "1.2.2"
+
 "react-is@^16.8.1":
   "integrity" "sha512-PVadd+WaUDOAciICm/J1waJaSvgq+4rHE/K70j0PFqKhkTBsPv/82UGQJNXAngz1fOQLLxI6z1sEDmJDQhCTAA=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.8.4.tgz"
