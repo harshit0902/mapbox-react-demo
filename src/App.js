@@ -3,7 +3,7 @@ import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import { GoogleComponent } from 'react-google-location'
 import * as parkDate from "./data/skateboard-parks.json";
 
-const API_KEY = AIzaSyCx0BnRX-Jsl-ic0UP0orEf-c0oEdHwR4A;
+const API_KEY = "AIzaSyDwYUA4l_7DGwcEYysE6UhUk6cf-gBbjtU";
 
 export default function App() {
   let dist;
@@ -136,7 +136,7 @@ export default function App() {
         placeholder='Radius'
         onChange={(e) => { setRadius(e.target.value) }}
       />
-      
+
       {console.log("Rad: " + radius)};
       <button className="button" onClick={() => calculate(radius)}>
         Calculate Distance
@@ -153,19 +153,20 @@ export default function App() {
       {/* <div ref={mapContainer} className="map-container" /> */}
 
       <GoogleComponent
-         
-          apiKey={API_KEY}
-          language={'en'}
-          country={'country:in|country:us'}
-          coordinates={true}
-          currentCoordinates={{
-            "lat": currentLocation.latitude,
-            "lng": currentLocation.longitude
-          }}
-          placeholder={'Start typing location'}
-          locationBoxStyle={'custom-style'}
-          locationListStyle={'custom-style-list'}
-          onChange={(e) => { setPlace(e.target.value) }} />
+
+        apiKey={API_KEY}
+        language={'en'}
+        country={'country:in|country:us'}
+        coordinates={true}
+        currentCoordinates={{
+          "lat": currentLocation.latitude,
+          "lng": currentLocation.longitude
+        }}
+        placeholder={'Start typing location'}
+        locationBoxStyle={'custom-style'}
+        locationListStyle={'custom-style-list'}
+        onChange={(e) => { setPlace(e.value) }}
+      />
 
       <ReactMapGL
         {...viewport}
