@@ -153,7 +153,7 @@ export default function App() {
       {/* <div ref={mapContainer} className="map-container" /> */}
 
       <GoogleComponent
-
+      
         apiKey={API_KEY}
         language={'en'}
         country={'country:in|country:us'}
