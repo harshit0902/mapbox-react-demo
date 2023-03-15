@@ -152,8 +152,7 @@ export default function App() {
       </div>
       {/* <div ref={mapContainer} className="map-container" /> */}
 
-      <GoogleComponent
-      
+      {/* <GoogleComponent
         apiKey={API_KEY}
         language={'en'}
         country={'country:in|country:us'}
@@ -166,7 +165,7 @@ export default function App() {
         locationBoxStyle={'custom-style'}
         locationListStyle={'custom-style-list'}
         onChange={(e) => { setPlace(e.value) }}
-      />
+      /> */}
 
       <ReactMapGL
         {...viewport}
@@ -210,8 +209,9 @@ export default function App() {
             </div>
           </Popup>
         ) : null}
+      </ReactMapGL>
 
-        {places.map((a) => {
+      {places.map((a) => {
           return (
             <>
               Place is:{a}
@@ -219,7 +219,6 @@ export default function App() {
             </>
           )
         })}
-      </ReactMapGL>
     </div>
   );
 }
